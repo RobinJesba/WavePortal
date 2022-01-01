@@ -7,28 +7,37 @@ import "hardhat/console.sol";
 contract WavePortal {
     // auto initialized with zero
     uint256 totalWaves;
-    address[] peopleWaved;
+
+    event NewWave(address indexed from, uint256 timestamp, string message);
+
+    struct Wave {
+        address waver;
+        string message;
+        uint256 timestamp;
+    }
+
+    Wave[] waves;
 
     constructor() {
         console.log("Smart Contract Constructor");
     }
 
-    function wave() public {
+    function wave(string memory _message) public {
         totalWaves += 1;
         // msg.sender -> wallet address of the sender who called the function
-        console.log("%s has waved!",msg.sender);
-        peopleWaved.push(msg.sender);
+        console.log("%s waved! %s",msg.sender, _message);
+
+        waves.push(Wave(msg.sender, _message, block.timestamp));
+
+        emit NewWave(msg.sender, block.timestamp, _message);
+    }
+
+    function getAllWaves() public view returns (Wave[] memory) {
+        return waves;
     }
 
     function getTotalWaves() public view returns (uint256) {
         console.log("We have %d total waves!", totalWaves);
         return totalWaves;
-    }
-
-    function getPeopleWaved() public view returns (address[] memory) {
-        console.log("People who waved:");
-        for(uint i=0; i<peopleWaved.length; i++)
-            console.log(peopleWaved[i]);
-        return peopleWaved;
     }
 }

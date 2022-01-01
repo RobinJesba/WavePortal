@@ -24,11 +24,21 @@
   margin-top: 16px;
 }
 
+.messageInput{
+  margin-top: 25px;
+  height: 70px;
+  border-color: #a5a5a5;
+}
+
+.messageInput:focus{
+  border-color: gray;
+  outline: none;
+}
+
 .waveButton {
   cursor: pointer;
   margin-top: 16px;
   padding: 8px;
   border: 0;
   border-radius: 5px;
-  
 }
