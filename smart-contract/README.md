@@ -13,3 +13,18 @@ npx hardhat node
 node scripts/sample-script.js
 npx hardhat help
 ```
+
+## hardhat.config.js
+```
+require("@nomiclabs/hardhat-waffle");
+
+module.exports = {
+  solidity: "0.8.4",
+  networks: {
+    rinkeby: {
+      url: "ALCHEMY API KEY",
+      accounts: ["Account Private Key"],
+    },
+  },
+}
+```
